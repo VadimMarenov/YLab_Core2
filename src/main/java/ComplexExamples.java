@@ -51,10 +51,11 @@ public class ComplexExamples {
     };
 
     public static void main(String[] args) {
-        // TASK 1
+        System.out.println("___________TASK 1___________");
 
         Map<String, Integer> persons = Arrays.stream(RAW_DATA)
                 .distinct()
+                .sorted(Comparator.comparing(Person::getId))
                 .map(Person::getName)
                 .collect(Collectors.toMap(Function.identity(), v -> 1, Integer::sum));
 
@@ -63,22 +64,29 @@ public class ComplexExamples {
             System.out.println("Value: " + entry.getValue());
         }
 
-        // TASK 2
+        System.out.println("___________TASK 2___________");
         int[] arr = {3, 4, 2, 7};
-        List<Integer> resultOfTask2 = getPair(arr, 10);
+        int sum = 10;
+        List<Integer> resultOfTask2 = getPair(arr, sum);
         System.out.println(resultOfTask2);
 
-        // TASK 3
+
+        System.out.println("___________TASK 3___________");
         fuzzySearch("car", "ca6$$#_rtwheel"); // true
         fuzzySearch("cwhl", "cartwheel"); // true
         fuzzySearch("cwhee", "cartwheel"); // true
         fuzzySearch("cartwheel", "cartwheel"); // true
         fuzzySearch("cwheeel", "cartwheel"); // false
         fuzzySearch("lw", "cartwheel"); // false
+        fuzzySearch("", "");
 
     }
 
     public static List<Integer> getPair(int[] array, int sum) {
+        if (array == null) {
+            System.out.println("The array is null. Impossible to get the pair");
+            return null;
+        }
         List<Integer> result = new ArrayList<>();
         Arrays.sort(array);
         int first = 0;
@@ -98,6 +106,10 @@ public class ComplexExamples {
     }
 
     public static boolean fuzzySearch(String first, String second) {
+        if (first == null || second == null) {
+            System.out.println("Some of the string is null");
+            return false;
+        }
         int countMatches = 0;
         int curIndex = 0;
         char[] firstArr = first.toCharArray();
@@ -115,39 +127,39 @@ public class ComplexExamples {
 
     }
 
-        /*
-        Task1
-            Убрать дубликаты, отсортировать по идентификатору, сгруппировать по имени
+/*
+Task1
+Убрать дубликаты, отсортировать по идентификатору, сгруппировать по имени
 
-            Что должно получиться
-                Key: Amelia
-                Value:4
-                Key: Emily
-                Value:1
-                Key: Harry
-                Value:3
-                Key: Jack
-                Value:1
-         */
+Что должно получиться
+Key: Amelia
+Value:4
+Key: Emily
+Value:1
+Key: Harry
+Value:3
+Key: Jack
+Value:1
+*/
 
-        /*
-        Task2
+/*
+Task2
 
-            [3, 4, 2, 7], 10 -> [3, 7] - вывести пару менно в скобках, которые дают сумму - 10
-         */
+[3, 4, 2, 7], 10 -> [3, 7] - вывести пару менно в скобках, которые дают сумму - 10
+*/
 
 
-        /*
-        Task3
-            Реализовать функцию нечеткого поиска
-            
-                    fuzzySearch("car", "ca6$$#_rtwheel"); // true
-                    fuzzySearch("cwhl", "cartwheel"); // true
-                    fuzzySearch("cwhee", "cartwheel"); // true
-                    fuzzySearch("cartwheel", "cartwheel"); // true
-                    fuzzySearch("cwheeel", "cartwheel"); // false
-                    fuzzySearch("lw", "cartwheel"); // false
-         */
+/*
+Task3
+Реализовать функцию нечеткого поиска
+
+fuzzySearch("car", "ca6$$#_rtwheel"); // true
+fuzzySearch("cwhl", "cartwheel"); // true
+fuzzySearch("cwhee", "cartwheel"); // true
+fuzzySearch("cartwheel", "cartwheel"); // true
+fuzzySearch("cwheeel", "cartwheel"); // false
+fuzzySearch("lw", "cartwheel"); // false
+*/
 
 
 }
